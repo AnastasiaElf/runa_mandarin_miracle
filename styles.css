@@ -33,6 +33,7 @@ a:hover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    margin-bottom: 10px;
 }
 
 .meta {
@@ -52,6 +53,7 @@ a:hover {
     animation: 2s ease-out showStartButton;
     cursor: pointer;
 }
+
 .start-button:hover {
     background: rgba(255, 255, 255, 0.85);
 }
@@ -63,6 +65,29 @@ a:hover {
     100% {
         opacity: 100;
     }
+}
+
+.scene {
+    height: 400px;
+    width: 800px;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: #f0fff9;
+    position: relative;
+}
+
+.character {
+    background-image: url("bee.png");
+    width: 110px;
+    height: 80px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 160px;
+    left: 20px;
+    filter: grayscale(100%);
 }
 
 .hidden {
