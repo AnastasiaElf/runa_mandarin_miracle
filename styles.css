@@ -77,17 +77,36 @@ a:hover {
     position: relative;
 }
 
+.background {
+    height: 100%;
+    width: 3200px;
+    background-image: url("background.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    animation: slide 15s linear infinite;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% + 800px));
+    }
+}
+
 .character {
     background-image: url("bee.png");
-    width: 110px;
-    height: 80px;
+    width: 100px;
+    height: 70px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
-    top: 160px;
+    top: 165px;
     left: 20px;
     filter: grayscale(100%);
+    transition: 0.5s ease;
 }
 
 .hidden {
