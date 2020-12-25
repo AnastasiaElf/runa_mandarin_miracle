@@ -11,8 +11,10 @@ startButton.addEventListener("click", (e) => {
   startGame();
 });
 
+const SCENE_WIDTH = 800;
 const SCENE_HEIGHT = 400;
 const CHARACTER_HEIGHT = 70;
+const MANDARIN_SIZE = 30;
 const STEP = CHARACTER_HEIGHT;
 const INIT_Y = 400 / 2 - CHARACTER_HEIGHT / 2;
 const MAX_Y = INIT_Y + STEP * 2;
@@ -42,4 +44,36 @@ function startGame() {
         break;
     }
   };
+
+  generateMandarins(-2);
+  generateMandarins(-1);
+  generateMandarins(0);
+  generateMandarins(1);
+  generateMandarins(2);
+}
+
+function generateMandarins(line) {
+  const mandarin = document.createElement("div");
+  let rightPosition = -30;
+
+  mandarin.classList.add("mandarin");
+  //   const line = Math.floor(Math.random() * 5) - 2;
+  mandarin.style.top = `${
+    INIT_Y + STEP * line + CHARACTER_HEIGHT / 2 - MANDARIN_SIZE / 2
+  }px`;
+  mandarin.style.right = `${rightPosition}px`;
+
+  scene.appendChild(mandarin);
+
+  function moveMandarin() {
+    if (rightPosition > SCENE_WIDTH + MANDARIN_SIZE) {
+      scene.removeChild(mandarin);
+      clearInterval(timer);
+      return;
+    }
+    rightPosition += 2;
+    mandarin.style.right = `${rightPosition}px`;
+  }
+
+  let timer = setInterval(moveMandarin, 20);
 }
