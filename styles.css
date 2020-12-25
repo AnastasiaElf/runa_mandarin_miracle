@@ -1,0 +1,70 @@
+html,
+body {
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: "Roboto";
+    color: #333333;
+}
+
+a {
+    text-decoration: none;
+    color: #ffaf2c;
+}
+
+a:hover {
+    color: #9ee366;
+}
+
+.welcome {
+    background-image: url("welcome.png");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    background-image: url("logo.png");
+    height: 75px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.meta {
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+}
+
+.start-button {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.75);
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+    animation: 2s ease-out showStartButton;
+    cursor: pointer;
+}
+.start-button:hover {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+@keyframes showStartButton {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+.hidden {
+    display: none;
+}
