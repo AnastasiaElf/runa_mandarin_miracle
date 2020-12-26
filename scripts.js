@@ -4,6 +4,7 @@ const scene = document.getElementById("scene");
 const background = document.getElementById("background");
 const header = document.getElementById("header");
 const story = document.getElementById("story");
+const end = document.getElementById("end");
 const character = document.getElementById("character");
 const pop = document.getElementById("pop");
 const totalScore = document.getElementById("score");
@@ -46,6 +47,7 @@ function showIntro() {
       introStep++;
       story.classList.add(`intro${introStep}`);
     } else {
+      story.classList.remove(`intro${introStep}`);
       clearInterval(introTimer);
       story.classList.add("hidden");
       startGame();
@@ -171,4 +173,21 @@ function onWin() {
   scene.removeChild(character);
   background.style.animationPlayState = "paused";
   clearInterval(mandarinGenerationTimer);
+
+  scene.classList.add("hidden");
+  story.classList.remove("hidden");
+  story.classList.add("outro1");
+
+  let outroStep = 1;
+
+  let outroTimer = setInterval(() => {
+    if (outroStep < 2) {
+      story.classList.remove(`outro${outroStep}`);
+      outroStep++;
+      story.classList.add(`outro${outroStep}`);
+    } else {
+      clearInterval(outroTimer);
+      end.classList.remove("hidden");
+    }
+  }, 4000);
 }
