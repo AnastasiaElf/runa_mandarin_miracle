@@ -29,6 +29,7 @@ const SCORE_TO_WIN = 100;
 
 let score = 0;
 let characterLine = 0;
+let hardness = 0;
 let isWin = false;
 
 let mandarinGenerationTimer;
@@ -87,7 +88,7 @@ function generateMandarins() {
       clearInterval(timer);
       return;
     }
-    leftPosition -= 2;
+    leftPosition -= 2 + hardness;
     mandarin.style.left = `${leftPosition}px`;
 
     if (
@@ -97,6 +98,7 @@ function generateMandarins() {
     ) {
       pop.play();
       score += 1;
+      hardness = Math.trunc(score / 20);
       totalScore.innerText = score;
       scene.removeChild(mandarin);
       clearInterval(timer);
@@ -109,6 +111,11 @@ function generateMandarins() {
   }
 
   let timer = setInterval(moveMandarin, 20);
+  clearInterval(mandarinGenerationTimer);
+  mandarinGenerationTimer = setInterval(
+    generateMandarins,
+    2000 - hardness * 250
+  );
 }
 
 let isPageHidden = false;
