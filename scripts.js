@@ -11,6 +11,7 @@ const totalScore = document.getElementById("score");
 const mobileControls = document.getElementById("mobile-controls");
 const mobileControlUp = document.getElementById("control-up");
 const mobileControlDown = document.getElementById("control-down");
+const controlsHint = document.getElementById("controls-hint");
 
 startButton.addEventListener("click", (e) => {
   welcomeScreen.classList.add("hidden");
@@ -30,6 +31,7 @@ const CHARACTER_END_X = 115;
 
 const SCORE_TO_WIN = 100;
 
+let isHintVisible = true;
 let score = 0;
 let characterLine = 0;
 let hardness = 0;
@@ -59,6 +61,7 @@ function showIntro() {
 }
 
 function startGame() {
+  header.classList.remove("hidden");
   scene.classList.remove("hidden");
   if ("ontouchstart" in document.documentElement) {
     mobileControls.classList.remove("hidden");
@@ -80,6 +83,10 @@ function startGame() {
   character.style.top = `${INIT_Y}px`;
 
   function onMoveCharacter(key) {
+    if (isHintVisible) {
+      isHintVisible = false;
+      controlsHint.classList.add("hidden");
+    }
     const top = parseInt(character.style.top);
 
     switch (key) {

@@ -151,7 +151,7 @@ a:hover {
     left: 20px;
     filter: grayscale(100%);
     transition: 0.3s ease;
-    z-index: 99999;
+    z-index: 99;
 }
 
 .mandarin {
@@ -203,6 +203,23 @@ a:hover {
 
 .control-down {
     transform: rotate(180deg);
+}
+
+.controls-hint {
+    position: absolute;
+    top: 85px;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+.controls-hint-text {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    padding: 2px 10px;
+    margin: 5px;
 }
 
 @media (max-width: 400px) {
