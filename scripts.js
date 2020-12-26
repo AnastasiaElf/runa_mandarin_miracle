@@ -1,6 +1,7 @@
 const welcomeScreen = document.getElementById("welcome");
 const startButton = document.getElementById("start");
 const scene = document.getElementById("scene");
+const background = document.getElementById("background");
 const header = document.getElementById("header");
 const character = document.getElementById("character");
 
@@ -45,19 +46,18 @@ function startGame() {
     }
   };
 
-  generateMandarins(-2);
-  generateMandarins(-1);
-  generateMandarins(0);
-  generateMandarins(1);
-  generateMandarins(2);
+  let timer = setInterval(generateMandarins, 2000);
 }
 
-function generateMandarins(line) {
+function generateMandarins() {
+  if (isPageHidden) {
+    return;
+  }
   const mandarin = document.createElement("div");
   let rightPosition = -30;
 
   mandarin.classList.add("mandarin");
-  //   const line = Math.floor(Math.random() * 5) - 2;
+  const line = Math.floor(Math.random() * 5) - 2;
   mandarin.style.top = `${
     INIT_Y + STEP * line + CHARACTER_HEIGHT / 2 - MANDARIN_SIZE / 2
   }px`;
@@ -66,6 +66,9 @@ function generateMandarins(line) {
   scene.appendChild(mandarin);
 
   function moveMandarin() {
+    if (isPageHidden) {
+      return;
+    }
     if (rightPosition > SCENE_WIDTH + MANDARIN_SIZE) {
       scene.removeChild(mandarin);
       clearInterval(timer);
@@ -76,4 +79,29 @@ function generateMandarins(line) {
   }
 
   let timer = setInterval(moveMandarin, 20);
+}
+
+let isPageHidden = false;
+let pageHidden, visibilityChange;
+
+if (typeof document.hidden !== "undefined") {
+  pageHidden = "hidden";
+  visibilityChange = "visibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+  pageHidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+  pageHidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+}
+
+document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+function handleVisibilityChange() {
+  isPageHidden = document[pageHidden];
+  if (isPageHidden) {
+    background.style.animationPlayState = "paused";
+  } else {
+    background.style.animationPlayState = "running";
+  }
 }
