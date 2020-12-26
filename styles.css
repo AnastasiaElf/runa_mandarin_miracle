@@ -106,7 +106,7 @@ a:hover {
     top: 165px;
     left: 20px;
     filter: grayscale(100%);
-    transition: 0.5s ease;
+    transition: 0.3s ease;
     z-index: 99999;
 }
 
@@ -119,7 +119,7 @@ a:hover {
     background-size: contain;
     position: absolute;
     top: 0;
-    right: 0;
+    left: 830px;
 }
 
 .hidden {

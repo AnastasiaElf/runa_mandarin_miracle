@@ -4,6 +4,7 @@ const scene = document.getElementById("scene");
 const background = document.getElementById("background");
 const header = document.getElementById("header");
 const character = document.getElementById("character");
+const pop = document.getElementById("pop");
 
 startButton.addEventListener("click", (e) => {
   welcomeScreen.classList.add("hidden");
@@ -20,6 +21,11 @@ const STEP = CHARACTER_HEIGHT;
 const INIT_Y = 400 / 2 - CHARACTER_HEIGHT / 2;
 const MAX_Y = INIT_Y + STEP * 2;
 const MIN_Y = INIT_Y - STEP * 2;
+const CHARACTER_START_X = 50;
+const CHARACTER_END_X = 115;
+
+let score = 0;
+let characterLine = 0;
 
 function startGame() {
   character.style.top = `${INIT_Y}px`;
@@ -32,11 +38,13 @@ function startGame() {
     switch (key) {
       case "ArrowUp":
         if (top > MIN_Y) {
+          characterLine -= 1;
           character.style.top = `${top - STEP}px`;
         }
         break;
       case "ArrowDown":
         if (top < MAX_Y) {
+          characterLine += 1;
           character.style.top = `${top + STEP}px`;
         }
         break;
@@ -54,28 +62,39 @@ function generateMandarins() {
     return;
   }
   const mandarin = document.createElement("div");
-  let rightPosition = -30;
+  let leftPosition = SCENE_WIDTH + 30;
+  const line = Math.floor(Math.random() * 5) - 2;
+  let topPosition =
+    INIT_Y + STEP * line + CHARACTER_HEIGHT / 2 - MANDARIN_SIZE / 3;
 
   mandarin.classList.add("mandarin");
-  const line = Math.floor(Math.random() * 5) - 2;
-  mandarin.style.top = `${
-    INIT_Y + STEP * line + CHARACTER_HEIGHT / 2 - MANDARIN_SIZE / 3
-  }px`;
-  mandarin.style.right = `${rightPosition}px`;
-
+  mandarin.style.top = `${topPosition}px`;
+  mandarin.style.left = `${leftPosition}px`;
   scene.appendChild(mandarin);
 
   function moveMandarin() {
     if (isPageHidden) {
       return;
     }
-    if (rightPosition > SCENE_WIDTH + MANDARIN_SIZE) {
+    if (leftPosition < -MANDARIN_SIZE) {
       scene.removeChild(mandarin);
       clearInterval(timer);
       return;
     }
-    rightPosition += 2;
-    mandarin.style.right = `${rightPosition}px`;
+    leftPosition -= 2;
+    mandarin.style.left = `${leftPosition}px`;
+
+    if (
+      leftPosition > CHARACTER_START_X &&
+      leftPosition < CHARACTER_END_X &&
+      characterLine === line
+    ) {
+      pop.play();
+      score += 1;
+      scene.removeChild(mandarin);
+      clearInterval(timer);
+      return;
+    }
   }
 
   let timer = setInterval(moveMandarin, 20);
