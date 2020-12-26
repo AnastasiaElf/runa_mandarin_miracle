@@ -3,15 +3,14 @@ const startButton = document.getElementById("start");
 const scene = document.getElementById("scene");
 const background = document.getElementById("background");
 const header = document.getElementById("header");
+const story = document.getElementById("story");
 const character = document.getElementById("character");
 const pop = document.getElementById("pop");
 const totalScore = document.getElementById("score");
 
 startButton.addEventListener("click", (e) => {
   welcomeScreen.classList.add("hidden");
-  scene.classList.remove("hidden");
-  header.classList.remove("hidden");
-  startGame();
+  showIntro();
 });
 
 const SCENE_WIDTH = 800;
@@ -34,9 +33,29 @@ let isWin = false;
 
 let mandarinGenerationTimer;
 
+function showIntro() {
+  header.classList.remove("hidden");
+  story.classList.remove("hidden");
+  story.classList.add("intro1");
+
+  let introStep = 1;
+
+  let introTimer = setInterval(() => {
+    if (introStep < 3) {
+      story.classList.remove(`intro${introStep}`);
+      introStep++;
+      story.classList.add(`intro${introStep}`);
+    } else {
+      clearInterval(introTimer);
+      story.classList.add("hidden");
+      startGame();
+    }
+  }, 4000);
+}
+
 function startGame() {
+  scene.classList.remove("hidden");
   character.style.top = `${INIT_Y}px`;
-  character.classList.remove("hidden");
 
   window.onkeydown = (e) => {
     const key = e.code;
@@ -61,6 +80,7 @@ function startGame() {
     }
   };
 
+  generateMandarins();
   mandarinGenerationTimer = setInterval(generateMandarins, 2000);
 }
 

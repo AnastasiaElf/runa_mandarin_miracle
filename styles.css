@@ -36,6 +36,31 @@ a:hover {
     margin-bottom: 10px;
 }
 
+.story {
+    height: 400px;
+    max-width: 100%;
+    max-height: calc(100vh - 100px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-image .8s ease-in-out;
+}
+
+.story.intro1 {
+    background-image: url("intro1.png");
+}
+
+.story.intro2 {
+    background-image: url("intro2.png");
+}
+
+.story.intro3 {
+    background-image: url("intro3.png");
+}
+
 .meta {
     padding: 10px;
     position: absolute;
