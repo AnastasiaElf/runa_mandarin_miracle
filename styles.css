@@ -122,6 +122,16 @@ a:hover {
     left: 830px;
 }
 
+.score {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-weight: bold;
+    background: #ffffff;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
 .hidden {
     display: none;
 }

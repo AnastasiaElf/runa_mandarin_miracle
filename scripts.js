@@ -5,6 +5,7 @@ const background = document.getElementById("background");
 const header = document.getElementById("header");
 const character = document.getElementById("character");
 const pop = document.getElementById("pop");
+const totalScore = document.getElementById("score");
 
 startButton.addEventListener("click", (e) => {
   welcomeScreen.classList.add("hidden");
@@ -24,8 +25,13 @@ const MIN_Y = INIT_Y - STEP * 2;
 const CHARACTER_START_X = 50;
 const CHARACTER_END_X = 115;
 
+const SCORE_TO_WIN = 100;
+
 let score = 0;
 let characterLine = 0;
+let isWin = false;
+
+let mandarinGenerationTimer;
 
 function startGame() {
   character.style.top = `${INIT_Y}px`;
@@ -54,11 +60,11 @@ function startGame() {
     }
   };
 
-  let timer = setInterval(generateMandarins, 2000);
+  mandarinGenerationTimer = setInterval(generateMandarins, 2000);
 }
 
 function generateMandarins() {
-  if (isPageHidden) {
+  if (isPageHidden || isWin) {
     return;
   }
   const mandarin = document.createElement("div");
@@ -76,7 +82,7 @@ function generateMandarins() {
     if (isPageHidden) {
       return;
     }
-    if (leftPosition < -MANDARIN_SIZE) {
+    if (leftPosition < -MANDARIN_SIZE || isWin) {
       scene.removeChild(mandarin);
       clearInterval(timer);
       return;
@@ -91,8 +97,13 @@ function generateMandarins() {
     ) {
       pop.play();
       score += 1;
+      totalScore.innerText = score;
       scene.removeChild(mandarin);
       clearInterval(timer);
+      character.style.filter = `grayscale(${100 - score}%)`;
+      if (score === SCORE_TO_WIN) {
+        onWin();
+      }
       return;
     }
   }
@@ -117,10 +128,20 @@ if (typeof document.hidden !== "undefined") {
 document.addEventListener(visibilityChange, handleVisibilityChange, false);
 
 function handleVisibilityChange() {
+  if (isWin) {
+    return;
+  }
   isPageHidden = document[pageHidden];
   if (isPageHidden) {
     background.style.animationPlayState = "paused";
   } else {
     background.style.animationPlayState = "running";
   }
+}
+
+function onWin() {
+  isWin = true;
+  scene.removeChild(character);
+  background.style.animationPlayState = "paused";
+  clearInterval(mandarinGenerationTimer);
 }
