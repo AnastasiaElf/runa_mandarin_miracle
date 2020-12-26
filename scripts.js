@@ -59,7 +59,7 @@ function generateMandarins() {
   mandarin.classList.add("mandarin");
   const line = Math.floor(Math.random() * 5) - 2;
   mandarin.style.top = `${
-    INIT_Y + STEP * line + CHARACTER_HEIGHT / 2 - MANDARIN_SIZE / 2
+    INIT_Y + STEP * line + CHARACTER_HEIGHT / 2 - MANDARIN_SIZE / 3
   }px`;
   mandarin.style.right = `${rightPosition}px`;
 
