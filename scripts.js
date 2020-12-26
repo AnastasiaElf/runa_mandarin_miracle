@@ -8,6 +8,9 @@ const end = document.getElementById("end");
 const character = document.getElementById("character");
 const pop = document.getElementById("pop");
 const totalScore = document.getElementById("score");
+const mobileControls = document.getElementById("mobile-controls");
+const mobileControlUp = document.getElementById("control-up");
+const mobileControlDown = document.getElementById("control-down");
 
 startButton.addEventListener("click", (e) => {
   welcomeScreen.classList.add("hidden");
@@ -57,10 +60,26 @@ function showIntro() {
 
 function startGame() {
   scene.classList.remove("hidden");
+  if ("ontouchstart" in document.documentElement) {
+    mobileControls.classList.remove("hidden");
+    mobileControlUp.addEventListener(
+      "click",
+      (e) => {
+        onMoveCharacter("ArrowUp");
+      },
+      false
+    );
+    mobileControlDown.addEventListener(
+      "click",
+      (e) => {
+        onMoveCharacter("ArrowDown");
+      },
+      false
+    );
+  }
   character.style.top = `${INIT_Y}px`;
 
-  window.onkeydown = (e) => {
-    const key = e.code;
+  function onMoveCharacter(key) {
     const top = parseInt(character.style.top);
 
     switch (key) {
@@ -80,6 +99,10 @@ function startGame() {
       default:
         break;
     }
+  }
+
+  window.onkeydown = (e) => {
+    onMoveCharacter(e.code);
   };
 
   generateMandarins();
