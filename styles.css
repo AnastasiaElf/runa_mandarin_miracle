@@ -119,6 +119,7 @@ a:hover {
     margin: 0 auto;
     background-color: #f0fff9;
     position: relative;
+    pointer-events: none;
 }
 
 .background {
