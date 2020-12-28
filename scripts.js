@@ -4,7 +4,7 @@ const scene = document.getElementById("scene");
 const background = document.getElementById("background");
 const header = document.getElementById("header");
 const story = document.getElementById("story");
-const end = document.getElementById("end");
+const endButton = document.getElementById("end");
 const character = document.getElementById("character");
 const pop = document.getElementById("pop");
 const totalScore = document.getElementById("score");
@@ -203,6 +203,7 @@ function onWin() {
   clearInterval(mandarinGenerationTimer);
 
   scene.classList.add("hidden");
+  mobileControls.classList.add("hidden");
   story.classList.remove("hidden");
   story.classList.add("outro1");
 
@@ -215,7 +216,10 @@ function onWin() {
       story.classList.add(`outro${outroStep}`);
     } else {
       clearInterval(outroTimer);
-      end.classList.remove("hidden");
+      endButton.classList.remove("hidden");
+      endButton.addEventListener("click", (e) => {
+        location.reload();
+      });
     }
   }, 4000);
 }
