@@ -25,8 +25,14 @@ a:hover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -46,9 +52,17 @@ a:hover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-transition: background-image 0.8s ease-in-out;
+    -o-transition: background-image 0.8s ease-in-out;
     transition: background-image 0.8s ease-in-out;
 }
 
@@ -85,6 +99,7 @@ a:hover {
     font-weight: bold;
     border-radius: 10px;
     font-size: 20px;
+    -webkit-animation: 2s ease-out showButton;
     animation: 2s ease-out showButton;
     cursor: pointer;
 }
@@ -99,7 +114,17 @@ a:hover {
     font-weight: bold;
     border-radius: 10px;
     font-size: 20px;
+    -webkit-animation: 2s ease-out showButton;
     animation: 2s ease-out showButton;
+}
+
+@-webkit-keyframes showButton {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
 }
 
 @keyframes showButton {
@@ -128,14 +153,28 @@ a:hover {
     background-image: url("background.png");
     background-repeat: repeat-x;
     background-size: contain;
+    -webkit-animation: slide 120s linear infinite;
     animation: slide 120s linear infinite;
+}
+
+@-webkit-keyframes slide {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(calc(-100% + 800px));
+        transform: translateX(calc(-100% + 800px));
+    }
 }
 
 @keyframes slide {
     0% {
+        -webkit-transform: translateX(0);
         transform: translateX(0);
     }
     100% {
+        -webkit-transform: translateX(calc(-100% + 800px));
         transform: translateX(calc(-100% + 800px));
     }
 }
@@ -150,7 +189,10 @@ a:hover {
     position: absolute;
     top: 165px;
     left: 20px;
+    -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+    -webkit-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
     transition: 0.3s ease;
     z-index: 99;
 }
@@ -165,6 +207,7 @@ a:hover {
     position: absolute;
     top: 0;
     left: 830px;
+    z-index: 98;
 }
 
 .score {
@@ -193,6 +236,7 @@ a:hover {
     background-size: contain;
     height: 40px;
     width: 40px;
+    -webkit-box-shadow: 0px 0px 5px 0px #404040;
     box-shadow: 0px 0px 5px 0px #404040;
     border-radius: 5px;
     opacity: 0.3;
@@ -203,6 +247,8 @@ a:hover {
 }
 
 .control-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
     transform: rotate(180deg);
 }
 
@@ -211,7 +257,11 @@ a:hover {
     top: 85px;
     right: 0;
     left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     z-index: 100;
 }
