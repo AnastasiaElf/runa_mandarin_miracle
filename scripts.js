@@ -113,10 +113,13 @@ function startGame() {
   };
 
   generateMandarins();
-  mandarinGenerationTimer = setInterval(generateMandarins, 2000);
 }
 
 function generateMandarins() {
+  mandarinGenerationTimer = setTimeout(
+    generateMandarins,
+    2000 - hardness * 250
+  );
   if (isPageHidden || isWin) {
     return;
   }
@@ -163,11 +166,6 @@ function generateMandarins() {
   }
 
   let timer = setInterval(moveMandarin, 20);
-  clearInterval(mandarinGenerationTimer);
-  mandarinGenerationTimer = setInterval(
-    generateMandarins,
-    2000 - hardness * 250
-  );
 }
 
 let isPageHidden = false;
