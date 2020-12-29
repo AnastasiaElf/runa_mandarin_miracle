@@ -7,6 +7,7 @@ const story = document.getElementById("story");
 const endButton = document.getElementById("end");
 const character = document.getElementById("character");
 const pop = document.getElementById("pop");
+const backgroundSound = document.getElementById("background-sound");
 const totalScore = document.getElementById("score");
 const mobileControls = document.getElementById("mobile-controls");
 const mobileControlUp = document.getElementById("control-up");
@@ -14,6 +15,9 @@ const mobileControlDown = document.getElementById("control-down");
 const controlsHint = document.getElementById("controls-hint");
 
 startButton.addEventListener("click", (e) => {
+  backgroundSound.play();
+  backgroundSound.volume = 0.1;
+  pop.volume = 1;
   welcomeScreen.classList.add("hidden");
   showIntro();
 });
