@@ -1,1 +1,1 @@
-Character and Arts: [Runa Solaris](https://linktr.ee/runasolaris)
+Character and Arts: [Runa Solaris](https://runasolaris.carrd.co/)
